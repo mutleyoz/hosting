@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "QRd7FyNSwu44BQd4Fre4fksCx5WOf2cp05VfPDWm/F+S7X1Q3I2dLmDZDmSGZcKKkEJcoaNwEMsplN3cQoxNtQ==",
+  "success": true,
+  "projectFilePath": "C:\\Development\\CodeExamples\\hosting\\webapi\\webapi.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Sean\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512"
+  ],
+  "logs": []
+}

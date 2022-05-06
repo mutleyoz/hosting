@@ -1,0 +1,10 @@
+C:\Development\CodeExamples\hosting\TestFixture\bin\Debug\netcoreapp3.1\TestFixture.deps.json
+C:\Development\CodeExamples\hosting\TestFixture\bin\Debug\netcoreapp3.1\TestFixture.dll
+C:\Development\CodeExamples\hosting\TestFixture\bin\Debug\netcoreapp3.1\TestFixture.pdb
+C:\Development\CodeExamples\hosting\TestFixture\obj\Debug\netcoreapp3.1\TestFixture.csproj.AssemblyReference.cache
+C:\Development\CodeExamples\hosting\TestFixture\obj\Debug\netcoreapp3.1\TestFixture.GeneratedMSBuildEditorConfig.editorconfig
+C:\Development\CodeExamples\hosting\TestFixture\obj\Debug\netcoreapp3.1\TestFixture.AssemblyInfoInputs.cache
+C:\Development\CodeExamples\hosting\TestFixture\obj\Debug\netcoreapp3.1\TestFixture.AssemblyInfo.cs
+C:\Development\CodeExamples\hosting\TestFixture\obj\Debug\netcoreapp3.1\TestFixture.csproj.CoreCompileInputs.cache
+C:\Development\CodeExamples\hosting\TestFixture\obj\Debug\netcoreapp3.1\TestFixture.dll
+C:\Development\CodeExamples\hosting\TestFixture\obj\Debug\netcoreapp3.1\TestFixture.pdb
