@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
 
-namespace TestFixture
+namespace Fixture
 {
     public class TestFixtureWebHost
     {
@@ -20,6 +21,14 @@ namespace TestFixture
                             .UseKestrel( options => {})
                             .UseConfiguration(_config)
                             .UseStartup(assembly.FullName);
+
+            builder.ConfigureAppConfiguration((context, config) =>
+            {
+                var overrides = new List<KeyValuePair<string, string>>();
+                overrides.Add(new KeyValuePair<string, string>("QuoteApi:uri", _url));
+
+                config.AddInMemoryCollection(overrides);
+            });
 
             return (builder.Build(), _url);
         }

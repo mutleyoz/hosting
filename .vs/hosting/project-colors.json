@@ -30,7 +30,22 @@
       "ProjectGuid": "648bf4c8-155c-45b9-b6c0-41a255b973a0",
       "DisplayName": "webapi",
       "ColorIndex": 4
+    },
+    "60e5ad6e-b553-49fb-a5b6-76dfad3c7b58": {
+      "ProjectGuid": "60e5ad6e-b553-49fb-a5b6-76dfad3c7b58",
+      "DisplayName": "hosting",
+      "ColorIndex": 5
+    },
+    "db3875c5-3f48-44a0-9718-8408ccc2cdb8": {
+      "ProjectGuid": "db3875c5-3f48-44a0-9718-8408ccc2cdb8",
+      "DisplayName": "webapi",
+      "ColorIndex": 6
+    },
+    "a0fe3809-4cb9-4194-b2a7-75e6828741d8": {
+      "ProjectGuid": "a0fe3809-4cb9-4194-b2a7-75e6828741d8",
+      "DisplayName": "TestFixture",
+      "ColorIndex": 7
     }
   },
-  "NextColorIndex": 5
+  "NextColorIndex": 8
 }

@@ -18,7 +18,6 @@ C:\Development\CodeExamples\hosting\host\bin\Debug\netcoreapp3.1\hosting.dll
 C:\Development\CodeExamples\hosting\host\bin\Debug\netcoreapp3.1\hosting.pdb
 C:\Development\CodeExamples\hosting\host\bin\Debug\netcoreapp3.1\webapi.dll
 C:\Development\CodeExamples\hosting\host\bin\Debug\netcoreapp3.1\webapi.pdb
-C:\Development\CodeExamples\hosting\host\obj\Debug\netcoreapp3.1\hosting.MvcApplicationPartsAssemblyInfo.cs
 C:\Development\CodeExamples\hosting\host\obj\Debug\netcoreapp3.1\staticwebassets\hosting.StaticWebAssets.Manifest.cache
 C:\Development\CodeExamples\hosting\host\obj\Debug\netcoreapp3.1\hosting.RazorTargetAssemblyInfo.cache
 C:\Development\CodeExamples\hosting\host\obj\Debug\netcoreapp3.1\hosting.csproj.CopyComplete
@@ -29,3 +28,4 @@ C:\Development\CodeExamples\hosting\host\bin\Debug\netcoreapp3.1\Microsoft.AspNe
 C:\Development\CodeExamples\hosting\host\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.dll
 C:\Development\CodeExamples\hosting\host\bin\Debug\netcoreapp3.1\TestFixture.dll
 C:\Development\CodeExamples\hosting\host\bin\Debug\netcoreapp3.1\TestFixture.pdb
+C:\Development\CodeExamples\hosting\host\obj\Debug\netcoreapp3.1\hosting.MvcApplicationPartsAssemblyInfo.cs
