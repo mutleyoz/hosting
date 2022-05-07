@@ -15,10 +15,10 @@ namespace hosting
     {
         public static void Main(string[] args)
         {
-            var host = new Fixture.TestFixtureWebHost();
-            var (webhost, url) = host.StartHost(typeof(webapi.Program).Assembly);
+            var host = new Fixture.TestFixture();
+            var (webhost, _) = host.BuildHost(typeof(webapi.Program).Assembly);
 
-            webhost.RunAsync();
+            webhost.RunAsync();               
 
             Console.WriteLine("Started host");
             Console.Read();
