@@ -25,11 +25,11 @@ namespace Fixture
 
     public class TestFixture : IDisposable
     {
-        public List<ClientProxy> Proxies { get; set; }
+        public List<ClientProxy> Proxies = new List<ClientProxy>();
 
-        public IWebHost webHost {get;set;}
+        public IWebHost _webhost {get;set;}
 
-        public (IWebHost, string) BuildHost(Assembly assembly, IConfigurationRoot config = null)
+        public (IWebHost, string) Build(Assembly assembly, IConfigurationRoot config = null)
         {
             var _config = config ?? new ConfigurationBuilder().AddJsonFile("hostsettings.json", optional: true).Build();
             var _url = FetchNextAvailableUrl();
@@ -47,7 +47,9 @@ namespace Fixture
                 config.AddInMemoryCollection(proxies);
             });
 
-            return (builder.Build(), _url);
+            _webhost = builder.Build();
+            Console.WriteLine($"Configured api under test for {_url}");
+            return (_webhost, _url);
         }
 
         public TestFixture AddDependencyUrl(string configurationEntry, RequestDelegate requestDelegate)
@@ -64,8 +66,9 @@ namespace Fixture
             foreach(var proxy in Proxies)
             {
                 proxy.WebHost = WebHost.Start(proxy.Url, proxy.RequestDelegate);
+                Console.WriteLine($"Started listening to '{proxy.Url}' for {proxy.ConfigurationKey}");
             }
-
+            _webhost.StartAsync();
         }
 
         private string FetchNextAvailableUrl() => $"http://*:{FetchNextAvailablePort()}";
@@ -87,8 +90,8 @@ namespace Fixture
                 proxy?.WebHost.Dispose();
             }
 
-            Task.FromResult(webHost.StopAsync());
-            webHost?.Dispose();
+            Task.FromResult(_webhost.StopAsync());
+            _webhost?.Dispose();
         }
     }
 }

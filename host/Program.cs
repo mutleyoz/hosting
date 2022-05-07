@@ -16,9 +16,14 @@ namespace hosting
         public static void Main(string[] args)
         {
             var host = new Fixture.TestFixture();
-            var (webhost, _) = host.BuildHost(typeof(webapi.Program).Assembly);
+            host.AddDependencyUrl("QuoteApi:uri", (context) =>
+            {
+                context.Response.WriteAsync("Stub for quote api");
+                return Task.CompletedTask;
+            });
+            var (webhost, url) = host.Build(typeof(webapi.Program).Assembly);
 
-            webhost.RunAsync();               
+            host.Start();
 
             Console.WriteLine("Started host");
             Console.Read();
