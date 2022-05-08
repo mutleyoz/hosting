@@ -64,7 +64,7 @@ namespace webapi.test
                 var forecasts = await JsonSerializer.DeserializeAsync<List<WeatherForecast>>(responseStream);
 
                 //Assert
-                Assert.Equal(String.Empty, forecasts?.First()?.Quote);
+                Assert.True(String.IsNullOrEmpty( forecasts?.First()?.Quote));
             }
             finally
             {

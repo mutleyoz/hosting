@@ -45,19 +45,21 @@ namespace webapi.Controllers
         public async Task<IEnumerable<WeatherForecast>> GetAsync()
         {
             var rng = new Random();
+            List<Quote> quotes;
 
             var uri = _config["QuoteApi:uri"];
-            using var responseStream = await _httpClient.GetStreamAsync(uri);
-            var quotes = await JsonSerializer.DeserializeAsync<List<Quote>>(responseStream);
-
+            var response = await _httpClient.GetAsync(uri);
+            quotes = response.IsSuccessStatusCode ? await JsonSerializer.DeserializeAsync<List<Quote>>(await response.Content.ReadAsStreamAsync()) : new List<Quote> { };
+            
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
-                Quote = quotes?.First().Text,
+                Quote = quotes?.FirstOrDefault()?.Text,
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+            
         }
     }
 }
