@@ -6,92 +6,89 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Net.Sockets;
 using System.Reflection;
-using System.Threading.Tasks;
 
-namespace Fixture
+namespace HttpFixture
 {
-    public class ClientProxy
+    internal class ClientProxy
     {
         public string ConfigurationKey { get; set; }
 
-        public string Url { get; set; }
+        public Uri Uri { get; set; }
 
         public RequestDelegate RequestDelegate { get; set; }
 
         public IWebHost WebHost { get; set; }
     }
 
-    public class TestFixture : IDisposable
+    public static class TestFixture
     {
-        public List<ClientProxy> Proxies = new List<ClientProxy>();
+        private static List<ClientProxy> Proxies = new List<ClientProxy>();
 
-        public IWebHost _webhost {get;set;}
+        private static IWebHost _webhost {get; set;}
 
-        public (IWebHost, string) Build(Assembly assembly, IConfigurationRoot config = null)
+        public static HttpClient Client { get; set; }
+
+        public static void Build(Assembly assembly, IConfigurationRoot config = null)
         {
             var _config = config ?? new ConfigurationBuilder().AddJsonFile("hostsettings.json", optional: true).Build();
-            var _url = FetchNextAvailableUrl();
+            var _uri = FetchNextAvailableUrl();
 
             var builder = WebHost.CreateDefaultBuilder()
                             .CaptureStartupErrors(true)
-                            .UseUrls(_url)
+                            .UseUrls(_uri.ToString())
                             .UseKestrel( options => {})
                             .UseConfiguration(_config)
                             .UseStartup(assembly.FullName);
 
             builder.ConfigureAppConfiguration((context, config) =>
             {
-                var proxies = Proxies.Select(p => new KeyValuePair<string, string>(p.ConfigurationKey, p.Url)).ToList();                                   
+                var proxies = Proxies.Select(p => new KeyValuePair<string, string>(p.ConfigurationKey, p.Uri.ToString())).ToList();                                   
                 config.AddInMemoryCollection(proxies);
             });
 
             _webhost = builder.Build();
-            Console.WriteLine($"Configured api under test for {_url}");
-            return (_webhost, _url);
+            Client = new HttpClient { BaseAddress = _uri };
         }
 
-        public TestFixture AddService(string configurationEntry, RequestDelegate requestDelegate)
+        public static void AddService(string configurationEntry, RequestDelegate requestDelegate)
         {
             Proxies.Add(new ClientProxy {  ConfigurationKey = configurationEntry, 
                                            RequestDelegate = requestDelegate,
-                                           Url = FetchNextAvailableUrl() 
+                                           Uri = FetchNextAvailableUrl() 
                                         });
-            return this;
         }
 
-        public void Start()
+        public static void Start()
         {
-            foreach(var proxy in Proxies)
-            {
-                proxy.WebHost = WebHost.Start(proxy.Url, proxy.RequestDelegate);
-                Console.WriteLine($"Started listening to '{proxy.Url}' for {proxy.ConfigurationKey}");
-            }
+            Proxies.ForEach(p => p.WebHost = WebHost.Start(p.Uri.ToString(), p.RequestDelegate));
             _webhost.StartAsync();
         }
 
-        private string FetchNextAvailableUrl() => $"http://localhost:{FetchNextAvailablePort()}";
-
-        private int FetchNextAvailablePort()
+        public static void Stop()
         {
-            using( var socket = new Socket(AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.Tcp))
+            Client.Dispose();
+
+            Proxies.ForEach(p =>
+            {
+                p.WebHost.StopAsync();
+                p?.WebHost.Dispose();
+            });
+
+            _webhost.StopAsync();
+            _webhost?.Dispose();
+        }
+        private static Uri FetchNextAvailableUrl() => new Uri($"http://localhost:{FetchNextAvailablePort()}");
+
+        private static int FetchNextAvailablePort()
+        {
+            using (var socket = new Socket(AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.Tcp))
             {
                 socket.Bind(new IPEndPoint(IPAddress.IPv6Loopback, 0));
                 return ((IPEndPoint)socket.LocalEndPoint).Port;
             }
-        }
-
-        public void Dispose()
-        {
-            foreach(var proxy in Proxies)
-            {
-                Task.FromResult(proxy.WebHost.StopAsync());
-                proxy?.WebHost.Dispose();
-            }
-
-            Task.FromResult(_webhost.StopAsync());
-            _webhost?.Dispose();
         }
     }
 }
