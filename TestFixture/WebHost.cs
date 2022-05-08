@@ -52,7 +52,7 @@ namespace Fixture
             return (_webhost, _url);
         }
 
-        public TestFixture AddDependencyUrl(string configurationEntry, RequestDelegate requestDelegate)
+        public TestFixture AddService(string configurationEntry, RequestDelegate requestDelegate)
         {
             Proxies.Add(new ClientProxy {  ConfigurationKey = configurationEntry, 
                                            RequestDelegate = requestDelegate,
@@ -71,7 +71,7 @@ namespace Fixture
             _webhost.StartAsync();
         }
 
-        private string FetchNextAvailableUrl() => $"http://*:{FetchNextAvailablePort()}";
+        private string FetchNextAvailableUrl() => $"http://localhost:{FetchNextAvailablePort()}";
 
         private int FetchNextAvailablePort()
         {
