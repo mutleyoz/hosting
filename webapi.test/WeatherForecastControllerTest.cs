@@ -1,13 +1,10 @@
 using HttpFixture;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using webapi.Controllers;
 using Xunit;
 
 namespace webapi.test
@@ -20,8 +17,9 @@ namespace webapi.test
             try
             {
                 // Arrange
-                TestFixture.AddService("QuoteApi:uri", (context) =>
+                TestFixture.AddProxy("QuoteApi:uri", (context) =>
                 {
+                    context.Response.StatusCode = StatusCodes.Status200OK;
                     context.Response.ContentType = "application/json";
                     context.Response.WriteAsync("[{ \"q\": \"Weaseling out of things is important to learn; it’s what separates us from the animals… except the weasel.\",\"a\": \"Homer Simpson\",\"h\":\"\"}]");
 
@@ -50,7 +48,7 @@ namespace webapi.test
             try
             {
                 // Arrange
-                TestFixture.AddService("QuoteApi:uri", (context) =>
+                TestFixture.AddProxy("QuoteApi:uri", (context) =>
                 {
                     context.Response.StatusCode = StatusCodes.Status404NotFound;
                     return Task.CompletedTask;
