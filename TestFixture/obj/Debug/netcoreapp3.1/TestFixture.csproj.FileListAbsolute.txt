@@ -7,4 +7,3 @@ C:\Development\CodeExamples\hosting\TestFixture\obj\Debug\netcoreapp3.1\TestFixt
 C:\Development\CodeExamples\hosting\TestFixture\obj\Debug\netcoreapp3.1\TestFixture.csproj.CoreCompileInputs.cache
 C:\Development\CodeExamples\hosting\TestFixture\obj\Debug\netcoreapp3.1\TestFixture.dll
 C:\Development\CodeExamples\hosting\TestFixture\obj\Debug\netcoreapp3.1\TestFixture.pdb
-C:\Development\CodeExamples\hosting\TestFixture\obj\Debug\netcoreapp3.1\TestFixture.csproj.AssemblyReference.cache

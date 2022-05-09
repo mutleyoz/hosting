@@ -27,7 +27,7 @@ namespace webapi.test
                 });
 
                 TestFixture.Build(typeof(Program).Assembly);
-                TestFixture.Start();
+                await TestFixture.StartAsync();
 
                 //Act
                 var responseStream = await TestFixture.Client.GetStreamAsync("/weatherforecast");
@@ -38,7 +38,7 @@ namespace webapi.test
             }
             finally
             {
-                TestFixture.Stop();
+                await TestFixture.StopAsync();
             }
         }
 
@@ -55,7 +55,7 @@ namespace webapi.test
                 });
 
                 TestFixture.Build(typeof(Program).Assembly);
-                TestFixture.Start();
+                await TestFixture.StartAsync();
 
                 //Act
                 var responseStream = await TestFixture.Client.GetStreamAsync("/weatherforecast");
@@ -66,7 +66,7 @@ namespace webapi.test
             }
             finally
             {
-                TestFixture.Stop();
+                await TestFixture.StopAsync();
             }
         }
     }

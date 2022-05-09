@@ -63,13 +63,13 @@ namespace HttpFixture
                                         });
         }
 
-        public static void Start()
+        public static async Task StartAsync()
         {
             _proxies.ForEach(p => p.WebHost = WebHost.Start(p.Uri.ToString(), p.RequestDelegate));
-            _webhost.StartAsync();
+            await _webhost.StartAsync();
         }
 
-        public static async Task Stop()
+        public static async Task StopAsync()
         {
             Client.Dispose();
 

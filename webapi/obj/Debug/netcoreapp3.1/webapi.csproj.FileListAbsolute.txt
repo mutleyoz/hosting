@@ -16,4 +16,3 @@ C:\Development\CodeExamples\hosting\webapi\obj\Debug\netcoreapp3.1\webapi.RazorT
 C:\Development\CodeExamples\hosting\webapi\obj\Debug\netcoreapp3.1\webapi.dll
 C:\Development\CodeExamples\hosting\webapi\obj\Debug\netcoreapp3.1\webapi.pdb
 C:\Development\CodeExamples\hosting\webapi\obj\Debug\netcoreapp3.1\webapi.genruntimeconfig.cache
-C:\Development\CodeExamples\hosting\webapi\obj\Debug\netcoreapp3.1\webapi.csproj.AssemblyReference.cache
