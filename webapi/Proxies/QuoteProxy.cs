@@ -25,8 +25,9 @@ namespace webapi.Proxies
 
         public async Task<HttpResponseMessage> FetchQuotes()
         {
-            var uri = _config["QuoteApi:uri"];
-            return await _httpClient.GetAsync(uri);
+            if (_config is null) throw new NullReferenceException(nameof(_config));
+
+            return await _httpClient.GetAsync(_config["QuoteApi:uri"]);
         }
     }
 }

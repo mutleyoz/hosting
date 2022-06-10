@@ -47,7 +47,7 @@ namespace webapi.Controllers
             var rng = new Random();
             List<Quote> quotes;
 
-            var response = await _quotesProxy.FetchQuote();
+            var response = await _quotesProxy.FetchQuotes();
 
             quotes = response.IsSuccessStatusCode ? await JsonSerializer.DeserializeAsync<List<Quote>>(await response.Content.ReadAsStreamAsync()) : new List<Quote> { };
             
