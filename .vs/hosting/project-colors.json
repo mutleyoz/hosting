@@ -45,7 +45,12 @@
       "ProjectGuid": "a0fe3809-4cb9-4194-b2a7-75e6828741d8",
       "DisplayName": "TestFixture",
       "ColorIndex": 7
+    },
+    "bcdc69a5-53ae-410a-8075-fcacac91c76c": {
+      "ProjectGuid": "bcdc69a5-53ae-410a-8075-fcacac91c76c",
+      "DisplayName": "webapi.test",
+      "ColorIndex": 8
     }
   },
-  "NextColorIndex": 8
+  "NextColorIndex": 9
 }

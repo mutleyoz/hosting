@@ -399,6 +399,21 @@
           "lib/netcoreapp2.1/Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.dll": {}
         }
       },
+      "Microsoft.AspNetCore.TestHost/3.1.0": {
+        "type": "package",
+        "dependencies": {
+          "System.IO.Pipelines": "4.7.0"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Microsoft.AspNetCore.TestHost.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Microsoft.AspNetCore.TestHost.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Microsoft.AspNetCore.WebUtilities/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -824,13 +839,13 @@
           }
         }
       },
-      "System.IO.Pipelines/4.5.2": {
+      "System.IO.Pipelines/4.7.0": {
         "type": "package",
         "compile": {
-          "ref/netstandard1.3/System.IO.Pipelines.dll": {}
+          "ref/netcoreapp2.0/System.IO.Pipelines.dll": {}
         },
         "runtime": {
-          "lib/netcoreapp2.1/System.IO.Pipelines.dll": {}
+          "lib/netcoreapp3.0/System.IO.Pipelines.dll": {}
         }
       },
       "System.Memory/4.5.1": {
@@ -1265,6 +1280,20 @@
         "lib/netstandard2.0/Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.xml",
         "microsoft.aspnetcore.server.kestrel.transport.sockets.2.2.0.nupkg.sha512",
         "microsoft.aspnetcore.server.kestrel.transport.sockets.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.TestHost/3.1.0": {
+      "sha512": "jUqV2X017y2xY8pgOpB/lySachxIf+GuLDQCZwmRYZWz8hy9QMOTNNQrrwTwB1O8imwJuABg5kuFl0wqjHFnlw==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.testhost/3.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "lib/netcoreapp3.1/Microsoft.AspNetCore.TestHost.dll",
+        "lib/netcoreapp3.1/Microsoft.AspNetCore.TestHost.xml",
+        "microsoft.aspnetcore.testhost.3.1.0.nupkg.sha512",
+        "microsoft.aspnetcore.testhost.nuspec"
       ]
     },
     "Microsoft.AspNetCore.WebUtilities/2.2.0": {
@@ -1855,23 +1884,24 @@
         "version.txt"
       ]
     },
-    "System.IO.Pipelines/4.5.2": {
-      "sha512": "NOC/SO4gSX6t0tB25xxDPqPEzkksuzW7NVFBTQGAkjXXUPQl7ZtyE83T7tUCP2huFBbPombfCKvq1Ox1aG8D9w==",
+    "System.IO.Pipelines/4.7.0": {
+      "sha512": "S0L7oyWyQdVzD+5xIvcC8h44Vc+FY+qXDCLRh2+YsuBDORNphcxNX+tXR6ByLMjQ/7jDaXxsYBF6qbAr7ZIaFw==",
       "type": "package",
-      "path": "system.io.pipelines/4.5.2",
+      "path": "system.io.pipelines/4.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
-        "lib/netcoreapp2.1/System.IO.Pipelines.dll",
-        "lib/netcoreapp2.1/System.IO.Pipelines.xml",
+        "lib/netcoreapp3.0/System.IO.Pipelines.dll",
+        "lib/netcoreapp3.0/System.IO.Pipelines.xml",
         "lib/netstandard1.3/System.IO.Pipelines.dll",
         "lib/netstandard1.3/System.IO.Pipelines.xml",
         "lib/netstandard2.0/System.IO.Pipelines.dll",
         "lib/netstandard2.0/System.IO.Pipelines.xml",
-        "ref/netstandard1.3/System.IO.Pipelines.dll",
-        "system.io.pipelines.4.5.2.nupkg.sha512",
+        "ref/netcoreapp2.0/System.IO.Pipelines.dll",
+        "ref/netcoreapp2.0/System.IO.Pipelines.xml",
+        "system.io.pipelines.4.7.0.nupkg.sha512",
         "system.io.pipelines.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -2221,6 +2251,7 @@
     ".NETCoreApp,Version=v3.1": [
       "Microsoft.AspNetCore >= 2.2.0",
       "Microsoft.AspNetCore.Hosting >= 2.2.7",
+      "Microsoft.AspNetCore.TestHost >= 3.1.0",
       "Microsoft.Extensions.Hosting >= 3.1.0"
     ]
   },
@@ -2274,6 +2305,10 @@
           "Microsoft.AspNetCore.Hosting": {
             "target": "Package",
             "version": "[2.2.7, )"
+          },
+          "Microsoft.AspNetCore.TestHost": {
+            "target": "Package",
+            "version": "[3.1.0, )"
           },
           "Microsoft.Extensions.Hosting": {
             "target": "Package",

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using webapi.Proxies;
 
 namespace webapi.Controllers
 {
@@ -31,14 +32,13 @@ namespace webapi.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IQuoteProxy _quotesProxy;
         private readonly IConfiguration _config;
-        private readonly HttpClient _httpClient;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IConfiguration config)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IQuoteProxy quoteProxy)
         {
             _logger = logger;
-            _config = config;
-            _httpClient = new HttpClient();
+            _quotesProxy = quoteProxy;
         }
 
         [HttpGet]
@@ -47,8 +47,8 @@ namespace webapi.Controllers
             var rng = new Random();
             List<Quote> quotes;
 
-            var uri = _config["QuoteApi:uri"];
-            var response = await _httpClient.GetAsync(uri);
+            var response = await _quotesProxy.FetchQuote();
+
             quotes = response.IsSuccessStatusCode ? await JsonSerializer.DeserializeAsync<List<Quote>>(await response.Content.ReadAsStreamAsync()) : new List<Quote> { };
             
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
