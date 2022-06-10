@@ -9,7 +9,7 @@ namespace webapi.Proxies
 {
     public interface IQuoteProxy
     {
-        Task<HttpResponseMessage> FetchQuote();
+        Task<HttpResponseMessage> FetchQuotes();
     }
 
     public class QuoteProxy : IQuoteProxy
@@ -23,7 +23,7 @@ namespace webapi.Proxies
             _config = configuration;
         }
 
-        public async Task<HttpResponseMessage> FetchQuote()
+        public async Task<HttpResponseMessage> FetchQuotes()
         {
             var uri = _config["QuoteApi:uri"];
             return await _httpClient.GetAsync(uri);

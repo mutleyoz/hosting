@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -40,31 +41,24 @@ namespace webapi.test
         [Fact]
         public async Task WeatherForecastController_ReturnsEmptyQuote_WhenServiceUnavailable()
         {
-            /*
-            try
+            using (var testFixture = new HttpTestFixture())
             {
                 // Arrange
-                TestFixture.AddProxy("QuoteApi:uri", (context) =>
-                {
-                    context.Response.StatusCode = StatusCodes.Status404NotFound;
-                    return Task.CompletedTask;
-                });
-
-                TestFixture.Build(typeof(Program).Assembly);
-                await TestFixture.StartAsync();
-
+                testFixture
+                    .AddProxy<IQuoteProxy, QuoteProxy>("QuoteApi:uri", (context) =>
+                    {
+                        context.Response.StatusCode = StatusCodes.Status404NotFound;
+                        return Task.CompletedTask;
+                    })
+                    .Build(typeof(Program).Assembly);
+    
                 //Act
-                var responseStream = await TestFixture.Client.GetStreamAsync("/weatherforecast");
+                var responseStream = await testFixture.Client.GetStreamAsync("/weatherforecast");
                 var forecasts = await JsonSerializer.DeserializeAsync<List<WeatherForecast>>(responseStream);
 
                 //Assert
-                Assert.True(String.IsNullOrEmpty( forecasts?.First()?.Quote));
+                Assert.True(String.IsNullOrEmpty(forecasts?.First()?.Quote));
             }
-            finally
-            {
-                await TestFixture.StopAsync();
-            }
-            */
         }
     }
 }
